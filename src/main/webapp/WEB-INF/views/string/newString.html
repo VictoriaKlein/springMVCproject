@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="fragment/form :: header"> </header>
+<div  th:replace="fragment/form:: stringForm"></div>
+<div th:replace = "fragment/output :: string_fragment"></div>
+<a href="/string/result"><button>Show result</button></a>
+<a href="/string/clean"><button>Clean</button></a>
+<a href="/string/saveString"><button>Import</button></a>
+<a href="/string/export"><button>export</button></a>
+<div  th:replace="fragment/form:: exportStringForm"></div>
+<footer th:insert="fragment/form :: footer"></footer>
+<script>
+        Array.from(document.getElementsByTagName('input')).forEach(
+        function(element) {
+        element.value = '';
+        }
+        );
+        </script>
+<form th:method="DELETE" th:action="@{/tasks/{id}(id=${task.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

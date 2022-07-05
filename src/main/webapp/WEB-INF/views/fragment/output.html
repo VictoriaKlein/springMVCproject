@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="string_fragment">
+        <span  th:text="${words}">string</span>
+    </div>
+    <div th:fragment="square_frag">
+        <style>
+ .squares-container{
+ display:flex;
+ flex-direction: row;
+        }
+.square {
+text-align: center;
+ font-size: 20px;
+width: 30vh;
+color: red;
+}
+th, td {
+  border-bottom: 1px solid #ddd;
+}
+th,td{
+border-right: 1px solid #ddd;
+}
+th, td {
+  border-left: 1px solid #ddd;
+}
+}
+</style>
+        <div class="squares-container">
+            <div>
+            <table class="square">
+                <thead>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${square}">
+                    <td th:text="${row[0]}"></td>
+                    <td th:text="${row[1]}"></td>
+                    <td th:text="${row[2]}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <div class="square">
+                <span th:text="${number}"></span>
+                <table class="square">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    <tr th:each="array : ${resultMagicSquare}">
+                    <tr>
+                        <td th:text="${array}"></td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

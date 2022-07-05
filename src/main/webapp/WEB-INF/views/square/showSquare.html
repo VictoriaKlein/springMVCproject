@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="fragment/form :: header"> </header>
+<div id="output" th:replace = "fragment/output :: square_frag"></div>
+</body>
+</html>

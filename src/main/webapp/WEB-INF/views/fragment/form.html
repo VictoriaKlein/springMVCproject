@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand" th:fragment = "header">
+            <a class="navbar-brand">My SpringMVC Project</a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/square">MagicSquare </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/string">Strings</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    <div th:fragment="exportStringForm">
+        <form id="sub_strings" th:method="POST" th:action="@{/string/export}">
+            <select th:field="*{inputString.wordList}">
+                <option value="0">select string</option>
+                <option th:each="string : ${exportString}" th:value="${string.getWordList}" th:text="${string.getWordList}"></option>
+            </select>
+            <select  th:field="*{inputSubString.characterList}">
+                <option value="0">select substring</option>
+                <option th:each="substring : ${exportSubString}" th:value="${substring.getCharacterList}" th:text="${substring.getCharacterList}"></option>
+            </select>
+            <button type="submit" name="export" value="export">export</button>
+        </form>
+
+    </div>
+        <div th:fragment="stringForm">
+            <form id="strings" th:method="POST" th:action="@{/string}" >
+                <select id="role" th:field="*{inputString.type}">
+             <option value="STRING">String</option>
+                    <option th:value="SUBSTRING">Substring</option>
+                </select>
+                <label for="desc">ENTER WORD:</label>
+                <input type="text" th:field="*{inputString.word}"  id ="desc"/>
+                <br/>
+                <button id="add">add</button>
+            </form>
+        </div>
+
+<div th:fragment="squareForm">
+    <style>
+.squareOfNumbers {
+width: 40vh;
+color: red;
+}
+td {
+ width: 33.33%;
+position: relative;
+}
+td:after {
+content: '';
+display: block;
+margin-top: 90%;
+}
+td .content {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+}
+</style>
+    <form id="squares" th:method="POST" th:action="@{/square}"  th:object="${inputSquare}">
+        <table class="squareOfNumbers">ENTER NUMBERS FROM 1 to 9
+            <tbody>
+            <tr th:each="row : ${array}">
+            <tr>
+<td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row0}"></td>
+<td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row0}"></td>
+<td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row0}"></td>
+            </tr>
+            <tr>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row1}"></td>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row1}"></td>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row1}"></td>
+            </tr>
+            <tr>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row2}"></td>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row2}"></td>
+                <td><input type="number" min="1" max="9" class="content" th:field="${inputSquare.row2}"></td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
+        <button value="compare">find</button>
+        <button type="submit" name="save" value="save">save and show result</button>
+    </form>
+            <form th:method="POST" th:action="@{/square}" >
+    <select th:field="${inputSquare.id}">
+        <option value="0">select square</option>
+        <option th:each="square : ${square}" th:value="${square.getId}" th:text="${square.getStringRepresantation}"></option>
+    </select>
+    <button type="submit" name="export" value="export">export</button>
+                <button type="submit" name="delete" value="delete">delete</button>
+                <button type="submit" name="edit" value="edit">edit</button>
+            </form>
+    <form th:method="POST" th:action="@{/square/edit}" th:object="${squareToChange}">
+        <label for="s">ENTER NUM:</label>
+        <input type="text" th:field="*{stringRepresantation}" id="s"/>
+        <br/>
+        <input type="submit" value="Update">
+    </form>
+</div>
+</div>
